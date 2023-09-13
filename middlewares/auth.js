@@ -20,9 +20,9 @@ exports.auth = async (req, res, next) => {
     // token verification
 
     try {
-      const decode = jwt.verify(token, process.env.JWT_SECRET);
+      const decode = jwt.verify(token, process.env.JWT_SECRET); // ye yaha pe ho gya hai...authentication
       console.log(decode);
-      req.user = decode; // req. k andar me store krlo
+      req.user = decode; // req. k andar me 'user' bana k store krlo taki authorisation k time me check kr sake
     } catch (err) {
       return res.status(401).json({
         success: false,
@@ -43,6 +43,7 @@ exports.auth = async (req, res, next) => {
 exports.isStudent = async (req, res, next) => {
   try {
     if (req.user.role !== "Student") {
+      // ab jo req. body k andar me dale hai...usko chck krna pdegaa--
       return res.status(401).json({
         success: false,
         message: "this is a protected route for students",

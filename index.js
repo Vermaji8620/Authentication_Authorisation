@@ -14,11 +14,10 @@ app.get("/", (req, res) => {
   res.send(`<div>this is for practice</div>`);
 });
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log("server started successfully");
 });
-
 
 // whats cookie-parser and why do we need it --------

@@ -85,11 +85,13 @@ exports.login = async (req, res) => {
       // await user.save(); // await kra ke save krna hga ...nai to jo token hm banane k bad store krna chah rahe hai user k andr wo user object k andar me store to hga lekin database me update nai hga....to user.save() krna hga hmko
       user.password = undefined; // hm us user wale object k andar me se password hata denge...taki passwrord send na ho sake response me jab hm jwt bhej rhe hai..server se client tak-----
 
-      // ab cookie banana hai
+      // upar me jo ye user k andar me token ko le liye hai..uske sirf ye matlb hai ki hm token ko copy kr sake apne authentication and authorisation k liye...bas aur ye kahi use nai hga---
+
       const options = {
         expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
         httpOnly: true,
       };
+      // ab cookie banana hai
       res.cookie("vermajicookie", token, options).status(200).json({
         success: true,
         user,
