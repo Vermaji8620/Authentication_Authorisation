@@ -3,7 +3,7 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-// below middlware is used for authentication 
+// below middlware is used for authentication
 
 // next ka mtalb hai ki kis middleware ka baad kon sa middleware start krna hai
 exports.auth = async (req, res, next) => {
