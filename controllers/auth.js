@@ -57,12 +57,13 @@ exports.login = async (req, res) => {
         message: "give valid email and password",
       });
     }
+
     let user = await User.findOne({ email });
 
     if (!user) {
       return res.status(404).json({
         success: false,
-        message: " email is not found. Please sign up ",
+        message: " email is not found. Please sign up",
       });
     }
 
@@ -83,16 +84,18 @@ exports.login = async (req, res) => {
       user = user.toObject();
       user.token = token; // user jo mila tha hmko database k andar mein usme 'token' naam ka ek aur field bana diya hai-------
       // await user.save(); // await kra ke save krna hga ...nai to jo token hm banane k bad store krna chah rahe hai user k andr wo user object k andar me store to hga lekin database me update nai hga....to user.save() krna hga hmko
-      user.password = undefined; // hm us user wale object k andar me se password hata denge...taki passwrord send na ho sake response me jab hm jwt bhej rhe hai..server se client tak-----
+      user.password = undefined; // hm us user wale object k andar me se password hata denge...taki passwrord send na ho sake response me jab hm jwt bhej rhe hai..  server se client tak-----
 
       // upar me jo ye user k andar me token ko le liye hai..uske sirf ye matlb hai ki hm token ko copy kr sake apne authentication and authorisation k liye...bas aur ye kahi use nai hga---
 
       const options = {
-        expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+        expires: new Date(Date.now() + 30000),
+        // expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
         httpOnly: true,
       };
+
       // ab cookie banana hai
-      res.cookie("vermajicookie", token, options).status(200).json({
+      return res.cookie("token", token, options).status(200).json({
         success: true,
         user,
         message: "user logged in successfully",

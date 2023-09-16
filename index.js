@@ -2,8 +2,11 @@ const express = require("express");
 const app = express();
 
 require("dotenv").config();
-
 require("./config/database")();
+
+// cookie k liye cookie-parser lagegea---------
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
 
 app.use(express.json());
 
